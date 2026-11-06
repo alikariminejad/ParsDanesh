@@ -128,3 +128,8 @@ REDIS_URL = env("REDIS_URL")
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+REST_FRAMEWORK = {
+        'DEFAULT_EXCEPTION_HANDLER':'core.exceptions.custom_exception_handler',
+}
