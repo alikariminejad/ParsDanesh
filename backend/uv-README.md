@@ -85,7 +85,7 @@ Need to run your full app?
 uv venv exec python src/main.py
 ```
 
-This ensures your script runs in the right environment, every time.
+This ens[ures you]()r script runs in the right environment, every time.
 
 ### Python Version Management with UV
 
@@ -111,9 +111,11 @@ If that version isn’t installed, UV downloads it and rebuilds the environment.
 ### Sync Dependencies
 
 Changed the Python version? Resync everything:
+
 ```shell
 uv pip install -e .
 ```
+
 Want reproducible installs? Use:
 
 ```shell

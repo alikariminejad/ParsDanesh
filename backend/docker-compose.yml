@@ -1,0 +1,57 @@
+services:
+  db:
+    hostname: 127.0.0.1
+    image: pgvector/pgvector:pg16
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - pgvector-postgres-vl:/var/lib/postgresql/data
+      - ./scripts/pgvector/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - pgvector-postgres-net
+  
+  redis:
+    image: redis:7-alpine
+    ports:
+      - 6379:6379
+    networks: 
+      - pgvector-postgres-net
+  
+  ollama:
+    image: ollama/ollama
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama-models:/root/.ollama
+    networks: 
+      - pgvector-postgres-net
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+      - redis
+      - ollama
+    env_file:
+      - .env
+    networks: 
+      - pgvector-postgres-net
+    
+
+volumes:
+  pgvector-postgres-vl:
+    driver: local
+  ollama-models:
+
+networks:
+  pgvector-postgres-net:
