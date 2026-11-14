@@ -14,22 +14,23 @@ services:
       - ./scripts/pgvector/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - pgvector-postgres-net
-  
+
   redis:
     image: redis:7-alpine
-    ports:
-      - 6379:6379
-    networks: 
+#    ports:
+#      - 6380:6379
+    networks:
       - pgvector-postgres-net
-  
+
   ollama:
     image: ollama/ollama
     ports:
       - 11434:11434
     volumes:
       - ollama-models:/root/.ollama
-    networks: 
+    networks:
       - pgvector-postgres-net
+
   backend:
     build:
       context: ./backend
@@ -38,20 +39,21 @@ services:
       - 8000:8000
     volumes:
       - ./backend:/app
+      - backend-venv:/app/.venv
     depends_on:
       - db
       - redis
       - ollama
     env_file:
-      - .env
-    networks: 
+      - backend/.env
+    networks:
       - pgvector-postgres-net
-    
 
 volumes:
   pgvector-postgres-vl:
     driver: local
   ollama-models:
+  backend-venv:
 
 networks:
   pgvector-postgres-net:
