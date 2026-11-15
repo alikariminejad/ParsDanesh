@@ -3,7 +3,8 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/backend">
       <sourceFolder url="file://$MODULE_DIR$/backend/.venv" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/backend/src" />
+      <sourceFolder url="file://$MODULE_DIR$/backend/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/.venv" />
     </content>
     <content url="file://$MODULE_DIR$/backend/.venv" />
     <orderEntry type="jdk" jdkName="C:\projects\ParsDanesh\backend\.venv" jdkType="Python SDK" />

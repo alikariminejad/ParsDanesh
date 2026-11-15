@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "drf_spectacular",
+    
     "core",
+    
+    "apps.accounts",
 ]
 
 MIDDLEWARE = [
@@ -141,3 +144,5 @@ CACHES = {
 }
 
 CACHE_TTL = 1000000
+
+AUTH_USER_MODEL = "apps.accounts.User"
