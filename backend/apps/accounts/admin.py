@@ -11,15 +11,16 @@ class DepartmentAdmin(admin.ModelAdmin):
 @admin.register(User)
 class CustomeUserAdmin(UserAdmin):
     model = User
-    list_display = ["email", "full_name", "role", "clearance_level", "department", "is_staff"]
+    list_display = ["email", "full_name", "role", "clearance_level", "primary_department", "is_staff"]
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('full_name','department')}),
+        ('Personal info', {'fields': ('full_name','primary_department')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions', 'groups')}),)
 
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'password1', 'password2', 'full_name'),}),)
+    ordering = ('email',)
     def get_queryset(self, request: HttpRequest):
-        return super().get_queryset(request).select_related('department')
+        return super().get_queryset(request).select_related('primary_department')

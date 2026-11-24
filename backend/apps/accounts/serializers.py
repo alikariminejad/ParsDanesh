@@ -29,11 +29,11 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validated_data)
     
 class UserSerializer(serializers.ModelSerializer):
-    department = serializers.StringRelatedField()
+    primary_department = serializers.StringRelatedField()
     
     class Meta:
         model = User
-        fields = ['id', 'email', 'full_name', 'department', 'role', 'clearance_level']
+        fields = ['id', 'email', 'full_name', 'primary_department', 'role', 'clearance_level']
         
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):

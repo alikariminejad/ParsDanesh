@@ -155,4 +155,4 @@ CACHES = {
 
 CACHE_TTL = 1000000
 
-AUTH_USER_MODEL = "apps.accounts.User"
+AUTH_USER_MODEL = "accounts.User"

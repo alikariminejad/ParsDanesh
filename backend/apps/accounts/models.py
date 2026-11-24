@@ -26,7 +26,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=255)
-    department = models.ForeignKey(Department, on_delete=SET_NULL, null=True, blank=True)
+    primary_department = models.ForeignKey(Department, on_delete=SET_NULL, null=True, blank=True)
     role = models.CharField(max_length=20,
                             choices=[("ADMIN", "Admin"), ("MANAGER", "Manager"), ("EMPLOYEE", "Employee")],
                             default="EMPLOYEE")
